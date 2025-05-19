@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نُطقنا - منصة دعم أولياء أطفال التوحد</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #85bae2;
+      --green: #92cac7;
+      --purple: #9999c9;
+      --dark: #333;
+      --light: #f8f9fa;
+      --gradient: linear-gradient(to left, #85bae2, #92cac7, #9999c9);
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'Tajawal', sans-serif;
+      color: var(--dark);
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    
+    /* التدرج اللوني في الخلفية */
+    .gradient-bg {
+      background: var(--gradient);
+      background-size: 200% 200%;
+      animation: gradientAnimation 8s ease infinite;
+    }
+    
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* الهيدر بدون إطار */
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.95) !important;
+      backdrop-filter: blur(10px);
+      padding: 15px 0;
+      border-bottom: none !important;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar.scrolled {
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    
+    .navbar-brand {
+      font-weight: 800;
+      color: var(--dark);
+    }
+    
+    .text-primary {
+      color: var(--blue) !important;
+    }
+    
+    /* أزرار بدون إطار */
+    .btn {
+      border: none;
+      border-radius: 50px;
+      padding: 12px 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary {
+      background-color: var(--blue);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(133, 186, 226, 0.3);
+    }
+    
+    .btn-outline-primary {
+      background-color: transparent;
+      color: var(--blue);
+      box-shadow: inset 0 0 0 2px var(--blue);
+    }
+    
+    .btn-outline-primary:hover {
+      background-color: var(--blue);
+      color: white;
+      transform: translateY(-3px);
+    }
+    
+    /* القسم الترحيبي بدون إطارات */
+    .hero-section {
+      min-height: 100vh;
+      padding: 120px 0 80px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.25rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    
+    /* الصورة بدون إطار */
+    .hero-img {
+      border-radius: 15px;
+      transition: all 0.5s ease;
+      max-width: 100%;
+      height: auto;
+      box-shadow: none;
+      transform: none;
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    /* تأثيرات النص */
+    .text-gradient {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    /* قسم المحتوى */
+    .content-section {
+      padding: 100px 0;
+      background-color: white;
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: var(--gradient);
+      margin-top: 15px;
+      border-radius: 2px;
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    /* بطاقات الخدمات */
+    .service-card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      height: 100%;
+      background: white;
+      position: relative;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    }
+    
+    .service-icon {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      font-size: 2rem;
+      color: white;
+      background: var(--gradient);
+    }
+    
+    /* قسم اتصل بنا */
+    .contact-info {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      padding: 30px;
+      height: 100%;
+    }
+    
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(133, 186, 226, 0.1);
+      color: var(--blue);
+      font-size: 1.2rem;
+    }
+    
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(133, 186, 226, 0.1);
+      color: var(--blue);
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      background: var(--blue);
+      color: white;
+      transform: translateY(-3px);
+    }
+    
+    /* الفوتر */
+    .footer {
+      background: var(--dark);
+      color: white;
+      padding: 60px 0 20px;
+    }
+    
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: block;
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a:hover {
+      color: white;
+      padding-right: 5px;
+    }
+    .col-lg-6 img{
+      width: 400px;
+      height: 400px;
+      border-radius: 15px;
+    }
+    /* التأثيرات على الشاشات الصغيرة */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+      
+      .hero-img {
+        margin-top: 2rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .content-section, .service-section {
+        padding: 60px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- الهيدر بدون إطار -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <h5 class="m-0">نُطقنا</h5>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#home">الرئيسية</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">من نحن</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">الخدمات</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">اتصل بنا</a></li>
+          <li class="nav-item"><a class="btn btn-outline-primary ms-3 px-4" href="login.html">تسجيل الدخول</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- القسم الترحيبي بدون إطارات -->
+  <section id="home" class="hero-section gradient-bg text-white">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- النص -->
+        <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right" data-aos-duration="1000">
+          <h1 class="hero-title">مرحبًا بك في <span class="text-gradient">نُطقنا</span>... حيث يبدأ الفهم، وينمو التواصل</h1>
+          <p class="hero-subtitle">
+            في عالم الطفل المصاب بالتوحد، كل إشارة هي رسالة، وكل تقدم هو إنجاز.  
+            في "نُطقنا"، نحن هنا لنمشي معك خطوة بخطوة نحو إدراك أعمق واحتواء أكبر.
+          </p>
+          <div class="d-flex gap-3">
+            <a href="login.html" class="btn btn-primary">ابدأ الرحلة</a>
+          </div>
+        </div>
+        <!-- الصورة -->
+        <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000">
+          <img src="images/home.png" alt="طفل مع والدته" class="img-fluid hero-img">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- محتوى الصفحة -->
+  <main id="about" class="content-section">
+    <div class="container">
+      <div class="row align-items-center mb-5">
+        <div class="col-lg-6" data-aos="fade-right" data-aos-duration="800">
+          <h1 class="section-title">من <span class="text-gradient">نحن</span></h1>
+          <p class="lead">نُطقنا منصة متخصصة لدعم أولياء أمور الأطفال المصابين بالتوحد، نقدم خدمات متكاملة لتسهيل رحلة العلاج والتأهيل.</p>
+          <p>تأسست منصتنا عام 2025 بهدف سد الفجوة بين الأسر والمتخصصين في مجال التوحد، ونؤمن بأن كل طفل يستحق فرصة للتعبير عن نفسه.</p>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left" data-aos-duration="800">
+          <img src="../new/images/us.jpg" alt="صورة عن الفريق" class="img-fluid rounded">
+        </div>
+      </div>
+      
+      <div class="row mt-5">
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+          <div class="text-center p-4">
+            <div class="feature-icon">🏆</div>
+            <h3>رؤيتنا</h3>
+            <p>أن نكون المنصة الرائدة في دعم أطفال التوحد وأسرهم في العالم العربي</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+          <div class="text-center p-4">
+            <div class="feature-icon">🎯</div>
+            <h3>رسالتنا</h3>
+            <p>تمكين الأسر من خلال تقديم حلول مبتكرة وخدمات متكاملة</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+          <div class="text-center p-4">
+            <div class="feature-icon">❤️</div>
+            <h3>قيمنا</h3>
+            <p>التعاطف، الاحتراف، الشفافية، والابتكار</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- قسم الخدمات المحدث -->
+  <section id="services" class="py-5" style="background-color: #f8f9fa;">
+    <div class="container py-5">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <h2 class="section-title">خدمات <span class="text-gradient">نُطقنا</span></h2>
+        <p class="lead">نقدم حلولاً متكاملة مصممة خصيصًا لاحتياجات طفلك</p>
+      </div>
+      
+      <div class="row g-4">
+        <!-- خدمة اختيار الأخصائي -->
+        <div class="col-md-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+          <div class="service-card">
+            <div class="card-body p-4 text-center">
+              <div class="service-icon">
+                <i class="fas fa-user-md"></i>
+              </div>
+              <h3 class="mb-3">اختيار الأخصائي المناسب</h3>
+              <p class="mb-4">
+                نظام متقدم لاختيار الأخصائي الأنسب حسب:
+              </p>
+              <ul class="text-start ps-4 mb-4">
+                <li class="mb-2">نوع اضطراب طفلك</li>
+                <li class="mb-2">العمر والتشخيص</li>
+                <li class="mb-2">الاحتياجات الخاصة</li>
+                <li>تقييمات الأهالي</li>
+              </ul>
+              <a href="login.html" class="btn btn-outline-primary">اختر أخصائياً</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- خدمة حجز الجلسات -->
+        <div class="col-md-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+          <div class="service-card">
+            <div class="card-body p-4 text-center">
+              <div class="service-icon">
+                <i class="fas fa-calendar-check"></i>
+              </div>
+              <h3 class="mb-3">حجز الجلسات</h3>
+              <p class="mb-4">
+                نظام حجز مرن يتيح لك:
+              </p>
+              <ul class="text-start ps-4 mb-4">
+                <li class="mb-2">جلسات <strong>حضورية</strong> في العيادات المتعاقد معها</li>
+                <li class="mb-2">جلسات <strong>أونلاين</strong> عبر المنصة</li>
+                <li class="mb-2">تحديد أوقات تناسبك</li>
+                <li>تذكير قبل الموعد</li>
+              </ul>
+              <a href="login.html" class="btn btn-outline-primary">احجز الآن</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- خدمة الاستشارات اليومية -->
+        <div class="col-md-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+          <div class="service-card">
+            <div class="card-body p-4 text-center">
+              <div class="service-icon">
+                <i class="fas fa-comment-medical"></i>
+              </div>
+              <h3 class="mb-3">استشارات يومية</h3>
+              <p class="mb-4">
+                نظام متابعة يومي يتضمن:
+              </p>
+              <ul class="text-start ps-4 mb-4">
+                <li class="mb-2">إرسال تقارير يومية عن تطور الطفل</li>
+                <li class="mb-2">استشارات فورية مع الأخصائي</li>
+                <li class="mb-2">تسجيل فيديوهات للحالات الخاصة</li>
+                <li>ردود مخصصة خلال 24 ساعة</li>
+              </ul>
+              <a href="login.html" class="btn btn-outline-primary">جرّب الخدمة</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- اتصل بنا Section -->
+  <section id="contact" class="py-5">
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center mb-5" data-aos="fade-up">
+          <h2 class="section-title">تواصل <span class="text-gradient">معنا</span></h2>
+          <p class="lead text-muted">نحن هنا للإجابة على جميع استفساراتك</p>
+        </div>
+      </div>
+      
+      <div class="row g-4">
+        <!-- معلومات التواصل -->
+        <div class="col-lg-5" data-aos="fade-right" data-aos-duration="800">
+          <div class="contact-info">
+            <h4 class="fw-bold mb-4">معلومات التواصل</h4>
+            
+            <div class="d-flex align-items-start mb-4">
+              <div class="contact-icon me-3">
+                <i class="fas fa-phone-alt"></i>
+              </div>
+              <div>
+                <h5 class="fw-bold mb-1">الهاتف</h5>
+                <p class="text-muted mb-0">+966 12 345 6789</p>
+              </div>
+            </div>
+            
+            <div class="d-flex align-items-start mb-4">
+              <div class="contact-icon me-3">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div>
+                <h5 class="fw-bold mb-1">البريد الإلكتروني</h5>
+                <p class="text-muted mb-0">nutqna@gmail.com</p>
+              </div>
+            </div>
+            
+            <div class="d-flex align-items-start mb-4">
+              <div class="contact-icon me-3">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div>
+                <h5 class="fw-bold mb-1">ساعات الرد على الاستفسارات</h5>
+                <p class="text-muted mb-0">الأحد - الخميس: 8 ص - 8 م</p>
+                <p class="text-muted mb-0">الجمعة - السبت: 10 ص - 4 م</p>
+              </div>
+            </div>
+            
+            <div class="mt-5">
+              <h5 class="fw-bold mb-3">تابعنا على</h5>
+              <div class="d-flex">
+                <a href="#" class="social-icon me-2">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-icon me-2">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon me-2">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-icon">
+                  <i class="fab fa-youtube"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- نموذج الاتصال -->
+        <div class="col-lg-7" data-aos="fade-left" data-aos-duration="800">
+          <div class="contact-info">
+            <h4 class="fw-bold mb-4">أرسل رسالة</h4>
+            <form action="https://formspree.io/f/xkgrerdk" method="POST" id="contact-form">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="name" class="form-label fw-bold">الاسم الكامل</label>
+                  <input type="text" class="form-control" id="name" name="name" placeholder="أدخل اسمك"required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="email" class="form-label fw-bold">البريد الإلكتروني</label>
+                  <input type="email" class="form-control" id="email" name="_replyto" placeholder="أدخل بريدك الإلكتروني" required >
+                </div>
+              </div>
+              
+              <div class="mb-3">
+                <label for="subject" class="form-label fw-bold">الموضوع</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="subject" 
+                  name="_subject" 
+                  placeholder="موضوع الرسالة"
+                >
+              </div>
+              
+              <div class="mb-3">
+                <label for="message" class="form-label fw-bold">الرسالة</label>
+                <textarea 
+                  class="form-control" 
+                  id="message" 
+                  name="message" 
+                  rows="5" 
+                  placeholder="أدخل رسالتك هنا..."
+                  required
+                ></textarea>
+              </div>
+              
+              <!-- Hidden honeypot field to prevent spam -->
+              <input type="text" name="_gotcha" style="display:none">
+              
+              <!-- Success message container -->
+              <div id="form-success" class="alert alert-success mt-3" style="display:none">
+                شكراً لك! تم إرسال رسالتك بنجاح.
+              </div>
+              
+              <button type="submit" class="btn btn-primary w-100 py-3 fw-bold">إرسال الرسالة</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- الفوتر -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 mb-4">
+          <img src="images/logo.png" alt="نطقنا" height="50" class="mb-3">
+          <p class="mb-3">منصة نطقنا هي منصة متخصصة لدعم أولياء أمور الأطفال المصابين بالتوحد، نقدم خدمات شاملة لتسهيل رحلة التواصل مع أطفالهم.</p>
+          <div class="d-flex">
+            <a href="#" class="social-icon me-2">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon me-2">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon me-2">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="col-lg-2 col-md-4 mb-4">
+          <h5 class="fw-bold mb-4">روابط سريعة</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="#home">الرئيسية</a></li>
+            <li class="mb-2"><a href="#about">من نحن</a></li>
+            <li class="mb-2"><a href="#services">الخدمات</a></li>
+            <li class="mb-2"><a href="#contact">اتصل بنا</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-lg-2 col-md-4 mb-4">
+          <h5 class="fw-bold mb-4">الخدمات</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="#">جلسات التخاطب</a></li>
+            <li class="mb-2"><a href="#">الاستشارات</a></li>
+            <li class="mb-2"><a href="#">الدورات التدريبية</a></li>
+            <li class="mb-2"><a href="#">المتابعة اليومية</a></li>
+            <li class="mb-2"><a href="#">مجموعات الدعم</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-lg-4 col-md-4 mb-4">
+          <h5 class="fw-bold mb-4">النشرة البريدية</h5>
+          <p class="mb-3">اشترك في نشرتنا البريدية ليصلك كل جديد عن خدماتنا.</p>
+          <form class="mb-3">
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="بريدك الإلكتروني">
+              <button class="btn btn-primary" type="submit">اشترك</button>
+            </div>
+          </form>
+          <p class="small">نحن نحترم خصوصيتك. لن نشارك بريدك مع أي طرف ثالث.</p>
+        </div>
+      </div>
+      
+      <hr style="border-color: rgba(255,255,255,0.1); margin: 2rem 0;">
+      
+      <div class="row">
+        <div class="col-md-6 text-center text-md-start">
+          <p class="mb-0 small">© 2023 نطقنا. جميع الحقوق محفوظة.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item"><a href="#" class="small">شروط الخدمة</a></li>
+            <li class="list-inline-item"><a href="#" class="small">سياسة الخصوصية</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS Animation -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Initialize AOS animation
+    AOS.init({
+      once: true
+    });
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) {
+        document.querySelector('.navbar').classList.add('scrolled');
+      } else {
+        document.querySelector('.navbar').classList.remove('scrolled');
+      }
+    });
+    
+    document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  const form = e.target;
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const successMsg = document.getElementById('form-success');
+  
+  // Disable button during submission
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = 'جاري الإرسال...';
+  
+  try {
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+    
+    if (response.ok) {
+      // Show success message
+      successMsg.style.display = 'block';
+      form.reset();
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        successMsg.style.display = 'none';
+      }, 5000);
+    } else {
+      throw new Error('فشل إرسال النموذج');
+    }
+  } catch (error) {
+    alert('حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى لاحقاً.');
+    console.error('Error:', error);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = 'إرسال الرسالة';
+  }
+});
+  </script>
+</body>
+</html>
